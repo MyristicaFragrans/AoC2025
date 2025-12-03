@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Myristica"
+	],
+	"copyright": "Copyright © 2025, Myristica",
+	"description": "A minimal D application.",
+	"license": "MPL-2.0",
+	"name": "adventofcode2025"
+}

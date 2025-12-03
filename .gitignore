@@ -1,0 +1,9 @@
+.dub
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
+*.txt
+input.txt
+test.txt

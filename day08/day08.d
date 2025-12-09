@@ -25,13 +25,14 @@ struct Edge {
 alias Distance = ulong;
 
 const bool USE_TEST_DATA = false;
+const bool EXPORT_OBJ = false;
 void main() {
   File input = File(USE_TEST_DATA ? "test.txt" : "input.txt", "r");
   Box[] boxes;
   while(!input.eof()) {
     string line = std.string.strip(input.readln());
     if(line.length == 0) continue;
-    auto coords = line.split(",").map!(a=>parse!ulong(a));
+    auto coords = line.split(",").map!(a=>parse!ulong(a)).array();
     boxes ~= Box([coords[0],coords[1],coords[2]], -1);
   }
   input.close();
@@ -112,6 +113,21 @@ void main() {
   
   writefln("Final answer: %(%s * %) = %s", numNodes[1..$].sort!"a>b"().take(3), reduce!"a * b"(numNodes[1..$].sort!"a>b"().take(3)));
   writefln("Part 1 took %s microseconds", sw.peek.total!"usecs");
+
+  static if (EXPORT_OBJ) {
+    File output = File("day8.obj", "w");
+    for(size_t i = 0; i < boxes.length; i++) {
+      auto coords = boxes[i].coordinates.array().map!(to!float).map!(a=>a/10_000f);
+      output.writefln("v %s %s %s", coords[0], coords[1], coords[2]);
+    }
+    for(size_t x = 0; x < edges.length; x++) {
+      for(size_t y = 0; y < x; y++) {
+        if(edges[x][y]) output.writefln("l %s %s", x, y);
+      }
+    }
+    output.close();
+    return;
+  }
 
   // Keep going until there is only one circuit
   // I'm not even going to bother measuring the time of this one.

@@ -20,3 +20,7 @@ nodes are connected, proved to be magnitudes faster!
 The function `getNumberOfCircuits()` could be further improved by keeping track
 of each ID's usage seperately in a lookup table, zero-ing it out in
 `mergeCircuits()` as needed. 
+
+This render was made in Blender using Geometry Nodes. There is an OBJ exporter
+as a conditional compilation flag in `day08.d`.
+![Render of AOC 2025 Day 8](./day8_aoc.png)
